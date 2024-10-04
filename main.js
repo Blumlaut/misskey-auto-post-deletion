@@ -15,7 +15,7 @@ const INCLUDE_RENOTES = process.env.INCLUDE_RENOTES === 'true' || false
 const INCLUDE_REPLIES = process.env.INCLUDE_REPLIES === 'true' || false
 const INCLUDE_ATTACHMENTS = process.env.INCLUDE_ATTACHMENTS === 'true' || false
 const INCLUDE_POLLS = process.env.INCLUDE_POLLS === 'true' || false
-const EXCLUDE_WORDS = process.env.EXCLUDE_WORDS.split(',')
+const EXCLUDE_WORDS = process.env.EXCLUDE_WORDS?.split(',') || undefined
 const MAX_RENOTES = parseInt(process.env.MAX_RENOTES) || 0
 const MAX_REPLIES = parseInt(process.env.MAX_REPLIES) || 0
 const MAX_REACTIONS = parseInt(process.env.MAX_REACTIONS) || 0
@@ -54,7 +54,6 @@ async function getOldPosts() {
             userId: USER_ID,
             withRenotes: INCLUDE_RENOTES,
             withReplies: INCLUDE_REPLIES,
-            withFiles: INCLUDE_ATTACHMENTS,
             untilDate: threshold*1000,
             limit: 100,
         });
@@ -72,7 +71,9 @@ async function getOldPosts() {
             oldPosts = oldPosts.filter((post) => post.reactionCount < MAX_REACTIONS);
         }
 
-        oldPosts = oldPosts.filter((post) => !EXCLUDE_WORDS.some(word => post?.text?.includes(word)));
+        if (EXCLUDE_WORDS) {
+            oldPosts = oldPosts.filter((post) => !EXCLUDE_WORDS.some(word => post?.text?.includes(word)));
+        }
 
         if (!INCLUDE_REPLIES) {
             oldPosts = oldPosts.filter((post) => !post.reply);
