@@ -51,7 +51,7 @@ async function getOldPosts() {
             userId: USER_ID,
             withRenotes: INCLUDE_RENOTES,
             withReplies: INCLUDE_REPLIES,
-            untilDate: threshold*1000,
+            untilDate: threshold,
             limit: 100,
         });
         console.log(`Found ${response.length} posts matching initial criteria.`)
