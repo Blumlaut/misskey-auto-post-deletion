@@ -5,7 +5,7 @@ how to set up:
 git clone https://github.com/Blumlaut/misskey-auto-post-deletion.git
 cd misskey-auto-post-deletion
 npm i
-mv .env.production .env
+mv .env.sample .env
 ```
 
 Edit the .env file and fill out all the details or make changes where needed, then start the app by using
