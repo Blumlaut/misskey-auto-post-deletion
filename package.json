@@ -8,8 +8,5 @@
     "start": "node --env-file .env main.js"
   },
   "author": "blumlaut",
-  "license": "SEE LICENSE IN LICENSE.md",
-  "dependencies": {
-    "dayjs": "^1.11.13"
-  }
+  "license": "SEE LICENSE IN LICENSE.md"
 }

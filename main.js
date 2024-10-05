@@ -1,6 +1,3 @@
-const dayjs = require('dayjs');
-
-
 // env vars
 const MISSKEY_URL = process.env.MISSKEY_URL
 const API_TOKEN = process.env.API_TOKEN
@@ -46,8 +43,8 @@ async function postRequest(url, data) {
 
 async function getOldPosts() {
     try {
-        const now = dayjs();
-        const threshold = now.subtract(DELETE_DAYS, 'days').unix();
+        const now = new Date();
+        const threshold = now.setDate(now.getDate() - DELETE_DAYS);
 
         const response = await postRequest(`https://${MISSKEY_URL}/api/users/notes`, {
             i: API_TOKEN,
